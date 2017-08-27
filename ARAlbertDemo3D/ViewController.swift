@@ -58,6 +58,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return PlaneNode(withAnchor: planeAnchor)
     }
     
+    // TODO: I don't know if i want to keep this here
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
         let planeNode = self.planes[anchor.identifier]
         planeNode?.removeFromParentNode()
