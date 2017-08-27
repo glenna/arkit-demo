@@ -19,7 +19,12 @@ class PlaneNode : SCNNode {
         super.init()
         
         self.plane = SCNPlane(width: CGFloat(anchor.extent.x), height: CGFloat(anchor.extent.z))
-        self.plane.firstMaterial?.diffuse.contents = UIColor.gray
+        let floorMaterial = SCNMaterial()
+        floorMaterial.diffuse.contents = #imageLiteral(resourceName: "hardwood")
+        floorMaterial.diffuse.contentsTransform = SCNMatrix4MakeScale(anchor.extent.x,anchor.extent.z, 1)
+        floorMaterial.diffuse.wrapT = .repeat
+        floorMaterial.diffuse.wrapS = .repeat
+        self.plane.materials = [floorMaterial]
         
         self.childPlaneNode = SCNNode(geometry:self.plane)
         self.childPlaneNode.position = SCNVector3Make(anchor.center.x, 0, anchor.center.z)
@@ -36,6 +41,12 @@ class PlaneNode : SCNNode {
     public func update(withAnchor anchor: ARPlaneAnchor) {
         self.plane.width = CGFloat(anchor.extent.x)
         self.plane.height = CGFloat(anchor.extent.z)
+        if let floorMaterial = self.plane.firstMaterial {
+            floorMaterial.diffuse.contentsTransform = SCNMatrix4MakeScale(anchor.extent.x,anchor.extent.z, 1)
+            floorMaterial.diffuse.wrapT = .repeat
+            floorMaterial.diffuse.wrapS = .repeat
+        }
+        
         let physics = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(geometry: self.plane, options: nil))
         self.childPlaneNode.physicsBody = physics
         self.childPlaneNode.position = SCNVector3Make(anchor.center.x, 0, anchor.center.z)

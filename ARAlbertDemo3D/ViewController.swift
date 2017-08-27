@@ -21,6 +21,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
+        sceneView.autoenablesDefaultLighting = true
+        
         //show the feature points
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
     }
@@ -109,8 +111,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func positionFromHitTestResult(_ hitPoint: ARHitTestResult) -> SCNVector3 {
+        let yOffset = Float(0.5)
         return SCNVector3Make(hitPoint.worldTransform.columns.3.x,
-                              hitPoint.worldTransform.columns.3.y,
+                              hitPoint.worldTransform.columns.3.y + yOffset,
                               hitPoint.worldTransform.columns.3.z)
     }
     
