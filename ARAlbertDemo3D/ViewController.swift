@@ -22,7 +22,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         //show the feature points
-        sceneView.debugOptions = SCNDebugOptions(rawValue: ARSCNDebugOptions.showFeaturePoints.rawValue)
+        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +41,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Pause the view's session
         sceneView.session.pause()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     // MARK: - ARSCNViewDelegate
@@ -114,14 +118,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - More Actions
     
     @IBAction func onRefreshPressed(_ sender: UIButton) {
-        print("refresh pressed")
         let sessionConfig = ARWorldTrackingConfiguration()
         sceneView.session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
         planes.removeAll()
         boxes.removeAll()
     }
     
-    @IBAction func onSwitchedChanged(_ sender: UISwitch) {
+    @IBAction func onPlaneDetectionSwitchChanged(_ sender: UISwitch) {
         //stop/start plane detection
         let sessionConfig = ARWorldTrackingConfiguration()
         if sender.isOn {
@@ -131,7 +134,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.run(sessionConfig, options: [])
     }
     
+    @IBAction func onFeaturePointSwitchChanged(_ sender: UISwitch) {
+        
+        if sender.isOn {
+            sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        } else {
+            sceneView.debugOptions = []
+        }
+    }
+    
+    @IBOutlet weak var planeDetectionSwitch: UISwitch!
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var featurePointSwitch: UISwitch!
     var planes = Dictionary<UUID, PlaneNode>() {
         didSet {
             print("number of planes \(planes.count)")
