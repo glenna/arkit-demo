@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD2121A41F4F3A6900E1F4F8 /* BoxyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2121A31F4F3A6900E1F4F8 /* BoxyNode.swift */; };
 		FD4CA6781F0936A00024CD5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4CA6771F0936A00024CD5C /* AppDelegate.swift */; };
 		FD4CA67A1F0936A00024CD5C /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FD4CA6791F0936A00024CD5C /* art.scnassets */; };
 		FD4CA67C1F0936A00024CD5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4CA67B1F0936A00024CD5C /* ViewController.swift */; };
@@ -14,6 +15,7 @@
 		FD4CA6811F0936A00024CD5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD4CA6801F0936A00024CD5C /* Assets.xcassets */; };
 		FD4CA6841F0936A00024CD5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD4CA6821F0936A00024CD5C /* LaunchScreen.storyboard */; };
 		FD4CA68F1F0936A00024CD5C /* ARAlbertDemo3DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4CA68E1F0936A00024CD5C /* ARAlbertDemo3DTests.swift */; };
+		FD562BD91F4DFFD8004317B3 /* PlaneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD562BD81F4DFFD8004317B3 /* PlaneNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD2121A31F4F3A6900E1F4F8 /* BoxyNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxyNode.swift; sourceTree = "<group>"; };
 		FD4CA6741F0936A00024CD5C /* ARAlbertDemo3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARAlbertDemo3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD4CA6771F0936A00024CD5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD4CA6791F0936A00024CD5C /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -38,6 +41,7 @@
 		FD4CA68A1F0936A00024CD5C /* ARAlbertDemo3DTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARAlbertDemo3DTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD4CA68E1F0936A00024CD5C /* ARAlbertDemo3DTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARAlbertDemo3DTests.swift; sourceTree = "<group>"; };
 		FD4CA6901F0936A00024CD5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD562BD81F4DFFD8004317B3 /* PlaneNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 				FD4CA6801F0936A00024CD5C /* Assets.xcassets */,
 				FD4CA6821F0936A00024CD5C /* LaunchScreen.storyboard */,
 				FD4CA6851F0936A00024CD5C /* Info.plist */,
+				FD562BD81F4DFFD8004317B3 /* PlaneNode.swift */,
+				FD2121A31F4F3A6900E1F4F8 /* BoxyNode.swift */,
 			);
 			path = ARAlbertDemo3D;
 			sourceTree = "<group>";
@@ -202,7 +208,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD4CA67C1F0936A00024CD5C /* ViewController.swift in Sources */,
+				FD2121A41F4F3A6900E1F4F8 /* BoxyNode.swift in Sources */,
 				FD4CA6781F0936A00024CD5C /* AppDelegate.swift in Sources */,
+				FD562BD91F4DFFD8004317B3 /* PlaneNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +359,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MNS274XJU5;
 				INFOPLIST_FILE = ARAlbertDemo3D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.glenners.ARAlbertDemo3D;
@@ -364,6 +373,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MNS274XJU5;
 				INFOPLIST_FILE = ARAlbertDemo3D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.glenners.ARAlbertDemo3D;
@@ -422,6 +432,7 @@
 				FD4CA6951F0936A00024CD5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FD4CA6961F0936A00024CD5C /* Build configuration list for PBXNativeTarget "ARAlbertDemo3DTests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +441,7 @@
 				FD4CA6981F0936A00024CD5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

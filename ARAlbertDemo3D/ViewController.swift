@@ -12,8 +12,6 @@ import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
-    @IBOutlet var sceneView: ARSCNView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,16 +23,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
+
         // Set the scene to the view
         sceneView.scene = scene
+        
+        //show the feature points
+        sceneView.debugOptions = SCNDebugOptions(rawValue: ARSCNDebugOptions.showFeaturePoints.rawValue)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Create a session configuration
-        let configuration = ARWorldTrackingSessionConfiguration()
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
         
         // Run the view's session
         sceneView.session.run(configuration)
@@ -47,34 +49,105 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
-    }
-
     // MARK: - ARSCNViewDelegate
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+
+        if let planeNode = node as? PlaneNode {
+            planeNode.update(withAnchor: planeAnchor)
+        }
     }
-*/
+    
+    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+        guard let planeAnchor = anchor as? ARPlaneAnchor else { return nil }
+        return PlaneNode(withAnchor: planeAnchor)
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
+        let planeNode = self.planes[anchor.identifier]
+        planeNode?.removeFromParentNode()
+        self.planes.removeValue(forKey: anchor.identifier)
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
+        let tapPoint = sender.location(in: sceneView)
+        let results = sceneView.hitTest(tapPoint, types: ARHitTestResult.ResultType.existingPlaneUsingExtent)
+        
+        if let arhitresult = results.first {
+            addABox(at: arhitresult)
+        }
+    }
+    
+    
+    
+    // MARK: more ARSCNViewDelegate
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
-        
+        print("session didFailWithError \(session)")
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
         // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
+        print("session interrupted \(session)")
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
+        print("session ended \(session)")
+    }
+    
+    func addABox(at hitPoint: ARHitTestResult) {
+        let cubeNode = BoxyNode()
+
+        cubeNode.position = positionFromHitTestResult(hitPoint)
+
+        sceneView.scene.rootNode.addChildNode(cubeNode)
+        let anchor = ARAnchor(transform: hitPoint.worldTransform)
+        sceneView.session.add(anchor: anchor)
+        boxes.append(cubeNode)
+    }
+    
+    func positionFromHitTestResult(_ hitPoint: ARHitTestResult) -> SCNVector3 {
+        let yOffset = Float(0.5)
+        return SCNVector3Make(hitPoint.worldTransform.columns.3.x,
+                              hitPoint.worldTransform.columns.3.y + yOffset,
+                              hitPoint.worldTransform.columns.3.z)
+    }
+    
+    
+    // MARK: - More Actions
+    
+    @IBAction func onRefreshPressed(_ sender: UIButton) {
+        print("refresh pressed")
+        let sessionConfig = ARWorldTrackingConfiguration()
+        sceneView.session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
+        planes.removeAll()
+        boxes.removeAll()
+    }
+    
+    @IBAction func onSwitchedChanged(_ sender: UISwitch) {
+        //stop/start plane detection
+        let sessionConfig = ARWorldTrackingConfiguration()
+        if sender.isOn {
+            sessionConfig.planeDetection = .horizontal
+        }
         
+        sceneView.session.run(sessionConfig, options: [])
+    }
+    
+    @IBOutlet var sceneView: ARSCNView!
+    var planes = Dictionary<UUID, PlaneNode>() {
+        didSet {
+            print("number of planes \(planes.count)")
+        }
+    }
+    var boxes = Array<SCNNode>() {
+        didSet {
+            print("number of boxes \(boxes.count)")
+        }
     }
 }
