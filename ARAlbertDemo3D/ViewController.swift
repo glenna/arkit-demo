@@ -21,12 +21,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-
-        // Set the scene to the view
-        sceneView.scene = scene
-        
         //show the feature points
         sceneView.debugOptions = SCNDebugOptions(rawValue: ARSCNDebugOptions.showFeaturePoints.rawValue)
     }
@@ -81,8 +75,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    
-    
     // MARK: more ARSCNViewDelegate
     
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -102,19 +94,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func addABox(at hitPoint: ARHitTestResult) {
         let cubeNode = BoxyNode()
-
         cubeNode.position = positionFromHitTestResult(hitPoint)
 
         sceneView.scene.rootNode.addChildNode(cubeNode)
+        
         let anchor = ARAnchor(transform: hitPoint.worldTransform)
         sceneView.session.add(anchor: anchor)
         boxes.append(cubeNode)
     }
     
     func positionFromHitTestResult(_ hitPoint: ARHitTestResult) -> SCNVector3 {
-        let yOffset = Float(0.5)
         return SCNVector3Make(hitPoint.worldTransform.columns.3.x,
-                              hitPoint.worldTransform.columns.3.y + yOffset,
+                              hitPoint.worldTransform.columns.3.y,
                               hitPoint.worldTransform.columns.3.z)
     }
     
