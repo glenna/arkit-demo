@@ -64,9 +64,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     // TODO: I don't know if i want to keep this here
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
-        let planeNode = self.planes[anchor.identifier]
-        planeNode?.removeFromParentNode()
-        self.planes.removeValue(forKey: anchor.identifier)
+        print("removed anchor \(anchor.identifier)")
     }
     
     // MARK: - Actions
@@ -120,6 +118,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func onRefreshPressed(_ sender: UIButton) {
         let sessionConfig = ARWorldTrackingConfiguration()
+        if planeDetectionSwitch.isOn {
+            sessionConfig.planeDetection = .horizontal
+        }
         sceneView.session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
         planes.removeAll()
         boxes.removeAll()
