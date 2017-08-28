@@ -30,7 +30,7 @@ class BoxyNode: SCNNode {
     
     func createBox() -> SCNBox {
         let dimension:CGFloat = 0.2
-        let cube = SCNBox(width: dimension, height: dimension, length: dimension, chamferRadius: 0.05)
+        let cube = SCNBox(width: dimension, height: dimension, length: dimension, chamferRadius: 0.01)
         
         let material = SCNMaterial()
         material.diffuse.contents = #imageLiteral(resourceName: "Cardboard")
