@@ -20,9 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
-        sceneView.autoenablesDefaultLighting = true
-        
+                
         //show the feature points
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
     }
