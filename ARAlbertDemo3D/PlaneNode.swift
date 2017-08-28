@@ -21,12 +21,12 @@ class PlaneNode : SCNNode {
         self.plane = SCNPlane(width: CGFloat(anchor.extent.x), height: CGFloat(anchor.extent.z))
         let floorMaterial = SCNMaterial()
         floorMaterial.diffuse.contents = #imageLiteral(resourceName: "hardwood")
-        floorMaterial.diffuse.contentsTransform = SCNMatrix4MakeScale(anchor.extent.x,anchor.extent.z, 1)
+        floorMaterial.diffuse.contentsTransform = SCNMatrix4MakeScale(anchor.extent.x, anchor.extent.z, 1)
         floorMaterial.diffuse.wrapT = .repeat
         floorMaterial.diffuse.wrapS = .repeat
         self.plane.materials = [floorMaterial]
         
-        self.childPlaneNode = SCNNode(geometry:self.plane)
+        self.childPlaneNode = SCNNode(geometry: self.plane)
         self.childPlaneNode.position = SCNVector3Make(anchor.center.x, 0, anchor.center.z)
         self.childPlaneNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0)
         
@@ -35,7 +35,6 @@ class PlaneNode : SCNNode {
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError()
-        //don't do it!
     }
     
     public func update(withAnchor anchor: ARPlaneAnchor) {

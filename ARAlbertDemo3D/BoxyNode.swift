@@ -17,7 +17,7 @@ class BoxyNode: SCNNode {
         let cube = createBox()
         self.geometry = cube;
         
-        let physics = SCNPhysicsBody(type:.static, shape: SCNPhysicsShape(geometry: cube, options: nil))
+        let physics = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: cube, options: nil))
         physics.mass = 0.01
         physics.categoryBitMask = 1
         
@@ -29,7 +29,7 @@ class BoxyNode: SCNNode {
     }
     
     func createBox() -> SCNBox {
-        let dimension:CGFloat = 0.2
+        let dimension: CGFloat = 0.2
         let cube = SCNBox(width: dimension, height: dimension, length: dimension, chamferRadius: 0.01)
         
         let material = SCNMaterial()

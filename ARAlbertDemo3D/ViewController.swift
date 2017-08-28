@@ -16,13 +16,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         // Set the view's delegate
-        sceneView.delegate = self
+        self.sceneView.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        self.sceneView.showsStatistics = true
                 
         //show the feature points
-        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,14 +33,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         configuration.planeDetection = .horizontal
         
         // Run the view's session
-        sceneView.session.run(configuration)
+        self.sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Pause the view's session
-        sceneView.session.pause()
+        self.sceneView.session.pause()
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -50,21 +50,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - ARSCNViewDelegate
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+        guard
+            let planeAnchor = anchor as? ARPlaneAnchor,
+            let planeNode = node as? PlaneNode
+        else { return }
 
-        if let planeNode = node as? PlaneNode {
-            planeNode.update(withAnchor: planeAnchor)
-        }
+        planeNode.update(withAnchor: planeAnchor)
     }
     
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return nil }
         return PlaneNode(withAnchor: planeAnchor)
-    }
-    
-    // TODO: I don't know if i want to keep this here
-    func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
-        print("removed anchor \(anchor.identifier)")
     }
     
     // MARK: - Actions
@@ -99,15 +95,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let cubeNode = BoxyNode()
         cubeNode.position = positionFromHitTestResult(hitPoint)
 
-        sceneView.scene.rootNode.addChildNode(cubeNode)
+        self.sceneView.scene.rootNode.addChildNode(cubeNode)
         
         let anchor = ARAnchor(transform: hitPoint.worldTransform)
-        sceneView.session.add(anchor: anchor)
-        boxes.append(cubeNode)
+        self.sceneView.session.add(anchor: anchor)
+        self.boxes.append(cubeNode)
     }
     
     func positionFromHitTestResult(_ hitPoint: ARHitTestResult) -> SCNVector3 {
-        let yOffset = Float(0.5)
+        let yOffset: Float = 0.5
         return SCNVector3Make(hitPoint.worldTransform.columns.3.x,
                               hitPoint.worldTransform.columns.3.y + yOffset,
                               hitPoint.worldTransform.columns.3.z)
@@ -121,9 +117,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if planeDetectionSwitch.isOn {
             sessionConfig.planeDetection = .horizontal
         }
-        sceneView.session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
-        planes.removeAll()
-        boxes.removeAll()
+        self.sceneView.session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
+        self.boxes.removeAll()
     }
     
     @IBAction func onPlaneDetectionSwitchChanged(_ sender: UISwitch) {
@@ -133,26 +128,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             sessionConfig.planeDetection = .horizontal
         }
         
-        sceneView.session.run(sessionConfig, options: [])
+        self.sceneView.session.run(sessionConfig, options: [])
     }
     
     @IBAction func onFeaturePointSwitchChanged(_ sender: UISwitch) {
         
         if sender.isOn {
-            sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+            self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         } else {
-            sceneView.debugOptions = []
+            self.sceneView.debugOptions = []
         }
     }
     
     @IBOutlet weak var planeDetectionSwitch: UISwitch!
-    @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var featurePointSwitch: UISwitch!
-    var planes = Dictionary<UUID, PlaneNode>() {
-        didSet {
-            print("number of planes \(planes.count)")
-        }
-    }
     var boxes = Array<SCNNode>() {
         didSet {
             print("number of boxes \(boxes.count)")
