@@ -49,6 +49,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     // MARK: - ARSCNViewDelegate
     
+    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+        guard let planeAnchor = anchor as? ARPlaneAnchor else { return nil }
+        return PlaneNode(withAnchor: planeAnchor)
+    }
+    
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         guard
             let planeAnchor = anchor as? ARPlaneAnchor,
@@ -56,11 +61,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         else { return }
 
         planeNode.update(withAnchor: planeAnchor)
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else { return nil }
-        return PlaneNode(withAnchor: planeAnchor)
     }
     
     // MARK: - Actions
