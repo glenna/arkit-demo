@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		FD2121A41F4F3A6900E1F4F8 /* BoxyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2121A31F4F3A6900E1F4F8 /* BoxyNode.swift */; };
 		FD4CA6781F0936A00024CD5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4CA6771F0936A00024CD5C /* AppDelegate.swift */; };
-		FD4CA67C1F0936A00024CD5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4CA67B1F0936A00024CD5C /* ViewController.swift */; };
+		FD4CA67C1F0936A00024CD5C /* DemoARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4CA67B1F0936A00024CD5C /* DemoARViewController.swift */; };
 		FD4CA67F1F0936A00024CD5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD4CA67D1F0936A00024CD5C /* Main.storyboard */; };
 		FD4CA6811F0936A00024CD5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD4CA6801F0936A00024CD5C /* Assets.xcassets */; };
 		FD4CA6841F0936A00024CD5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD4CA6821F0936A00024CD5C /* LaunchScreen.storyboard */; };
 		FD4CA68F1F0936A00024CD5C /* ARAlbertDemo3DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4CA68E1F0936A00024CD5C /* ARAlbertDemo3DTests.swift */; };
 		FD562BD91F4DFFD8004317B3 /* PlaneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD562BD81F4DFFD8004317B3 /* PlaneNode.swift */; };
+		FD9FD6621F7AE2D500928CC2 /* DemoVNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9FD6611F7AE2D500928CC2 /* DemoVNViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +32,7 @@
 		FD2121A31F4F3A6900E1F4F8 /* BoxyNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxyNode.swift; sourceTree = "<group>"; };
 		FD4CA6741F0936A00024CD5C /* ARAlbertDemo3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARAlbertDemo3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD4CA6771F0936A00024CD5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FD4CA67B1F0936A00024CD5C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FD4CA67B1F0936A00024CD5C /* DemoARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoARViewController.swift; sourceTree = "<group>"; };
 		FD4CA67E1F0936A00024CD5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FD4CA6801F0936A00024CD5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD4CA6831F0936A00024CD5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -40,6 +41,7 @@
 		FD4CA68E1F0936A00024CD5C /* ARAlbertDemo3DTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARAlbertDemo3DTests.swift; sourceTree = "<group>"; };
 		FD4CA6901F0936A00024CD5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD562BD81F4DFFD8004317B3 /* PlaneNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneNode.swift; sourceTree = "<group>"; };
+		FD9FD6611F7AE2D500928CC2 /* DemoVNViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoVNViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +84,8 @@
 			isa = PBXGroup;
 			children = (
 				FD4CA6771F0936A00024CD5C /* AppDelegate.swift */,
-				FD4CA67B1F0936A00024CD5C /* ViewController.swift */,
+				FD4CA67B1F0936A00024CD5C /* DemoARViewController.swift */,
+				FD9FD6611F7AE2D500928CC2 /* DemoVNViewController.swift */,
 				FD4CA67D1F0936A00024CD5C /* Main.storyboard */,
 				FD4CA6801F0936A00024CD5C /* Assets.xcassets */,
 				FD4CA6821F0936A00024CD5C /* LaunchScreen.storyboard */,
@@ -203,9 +206,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD4CA67C1F0936A00024CD5C /* ViewController.swift in Sources */,
+				FD4CA67C1F0936A00024CD5C /* DemoARViewController.swift in Sources */,
 				FD2121A41F4F3A6900E1F4F8 /* BoxyNode.swift in Sources */,
 				FD4CA6781F0936A00024CD5C /* AppDelegate.swift in Sources */,
+				FD9FD6621F7AE2D500928CC2 /* DemoVNViewController.swift in Sources */,
 				FD562BD91F4DFFD8004317B3 /* PlaneNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

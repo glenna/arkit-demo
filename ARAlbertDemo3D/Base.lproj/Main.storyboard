@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qke-Lc-L40">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--DemoAR View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="ARAlbertDemo3D" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="DemoARViewController" customModule="ARAlbertDemo3D" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zKt-GV-eAH"/>
                         <viewControllerLayoutGuide type="bottom" id="H1P-p6-D8w"/>
@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FYe-qd-gHJ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="666.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JxH-7Q-TeA">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
@@ -83,7 +83,7 @@
                                         </variation>
                                     </stackView>
                                     <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" autoenablesDefaultLighting="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KUW-0R-UYj">
-                                        <rect key="frame" x="0.0" y="59.5" width="375" height="607"/>
+                                        <rect key="frame" x="0.0" y="59.5" width="375" height="607.5"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                         <connections>
@@ -118,5 +118,41 @@
             </objects>
             <point key="canvasLocation" x="253.59999999999999" y="114.69265367316342"/>
         </scene>
+        <!--DemoVN View Controller-->
+        <scene sceneID="vuo-BG-eGa">
+            <objects>
+                <viewController id="qke-Lc-L40" customClass="DemoVNViewController" customModule="ARAlbertDemo3D" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZfD-6D-XB3"/>
+                        <viewControllerLayoutGuide type="bottom" id="q17-hW-Pr1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5eN-eE-GRN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="glennaWWDC" translatesAutoresizingMaskIntoConstraints="NO" id="rhT-VZ-6rV">
+                                <rect key="frame" x="0.0" y="106" width="375" height="278"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RHR-4N-Ag7">
+                                <rect key="frame" x="0.0" y="106" width="375" height="278"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="bezierPathView" destination="RHR-4N-Ag7" id="YO3-RI-rKs"/>
+                        <outlet property="glennaImageView" destination="rhT-VZ-6rV" id="OUj-jH-UOm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C5P-2I-vID" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1101.5999999999999" y="114.69265367316342"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="glennaWWDC" width="2576" height="1932"/>
+    </resources>
 </document>
