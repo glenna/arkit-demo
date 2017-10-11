@@ -114,7 +114,6 @@ class DemoARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelega
     }
     
     private func handleVisionRequestUpdate(_ request: VNRequest, error: Error?) {
-        // Dispatch to the main queue because we are touching non-atomic, non-thread safe properties of the view controller
         if let err = error {
             print("error: \(err)")
         }
