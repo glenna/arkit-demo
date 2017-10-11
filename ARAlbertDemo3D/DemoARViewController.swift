@@ -9,8 +9,23 @@
 import UIKit
 import SceneKit
 import ARKit
+import Vision
 
-class DemoARViewController: UIViewController, ARSCNViewDelegate {
+class DemoARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
+    
+    @IBOutlet weak var faceObservationSwitch: UISwitch!
+    @IBOutlet weak var planeDetectionSwitch: UISwitch!
+    @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var featurePointSwitch: UISwitch!
+    
+    
+    var boxes = Array<SCNNode>() {
+        didSet {
+            print("number of boxes \(boxes.count)")
+        }
+    }
+    private let visionSequenceHandler = VNSequenceRequestHandler()
+    private var lastObservation : VNFaceObservation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +38,9 @@ class DemoARViewController: UIViewController, ARSCNViewDelegate {
                 
         //show the feature points
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        
+        //vision framework is upside down
+        self.sceneView.layer.sublayerTransform = CATransform3DMakeScale(1.0, -1.0, 1.0);
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,6 +52,7 @@ class DemoARViewController: UIViewController, ARSCNViewDelegate {
         
         // Run the view's session
         self.sceneView.session.run(configuration)
+        self.sceneView.session.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,19 +82,6 @@ class DemoARViewController: UIViewController, ARSCNViewDelegate {
         planeNode.update(withAnchor: planeAnchor)
     }
     
-    // MARK: - Actions
-    
-    @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
-        let tapPoint = sender.location(in: sceneView)
-        let results = sceneView.hitTest(tapPoint, types: ARHitTestResult.ResultType.existingPlaneUsingExtent)
-        
-        if let arhitresult = results.first {
-            addABox(at: arhitresult)
-        }
-    }
-    
-    // MARK: more ARSCNViewDelegate
-    
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         print("session didFailWithError \(session)")
@@ -91,6 +97,76 @@ class DemoARViewController: UIViewController, ARSCNViewDelegate {
         print("session ended \(session)")
     }
     
+    // MARK: ARSessionDelegate
+    
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        if !self.faceObservationSwitch.isOn {
+            //don't overload ourselves here
+            return
+        }
+        let faceLandmarksRequest = VNDetectFaceLandmarksRequest(completionHandler: self.handleVisionRequestUpdate)
+
+        do {
+            try self.visionSequenceHandler.perform([faceLandmarksRequest], on: frame.capturedImage, orientation: CGImagePropertyOrientation.right)
+        } catch {
+            print("Throws: \(error)")
+        }
+    }
+    
+    private func handleVisionRequestUpdate(_ request: VNRequest, error: Error?) {
+        // Dispatch to the main queue because we are touching non-atomic, non-thread safe properties of the view controller
+        if let err = error {
+            print("error: \(err)")
+        }
+        
+        if let results = request.results as? [VNFaceObservation] {
+            print(results)
+            guard
+                let faceObservation = results.first,
+                let faceLandmarks = faceObservation.landmarks
+            else { print("no landmarks"); return }
+            
+            self.lastObservation = results.first
+            self.sceneView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            if let nose = faceLandmarks.nose {
+                let nosePoints = nose.pointsInImage(imageSize: self.sceneView.bounds.size)
+                
+                self.drawPointsOnImage(nosePoints)
+            }
+            
+            if let rightEye = faceLandmarks.rightEye {
+                let rightEyePoints = rightEye.pointsInImage(imageSize: self.sceneView.bounds.size)
+                
+                self.drawPointsOnImage(rightEyePoints)
+            }
+            
+            if let leftEye = faceLandmarks.leftEye {
+                let leftEyePoints = leftEye.pointsInImage(imageSize: self.sceneView.bounds.size)
+                
+                self.drawPointsOnImage(leftEyePoints)
+            }
+            
+            if let rightEyebrow = faceLandmarks.rightEyebrow {
+                let rightEyebrowPoints = rightEyebrow.pointsInImage(imageSize: self.sceneView.bounds.size)
+                
+                self.drawPointsOnImage(rightEyebrowPoints)
+            }
+            
+            if let leftEyebrow = faceLandmarks.leftEyebrow {
+                let leftEyebrowPoints = leftEyebrow.pointsInImage(imageSize: self.sceneView.bounds.size)
+                
+                self.drawPointsOnImage(leftEyebrowPoints)
+            }
+            
+            if let outerLips = faceLandmarks.outerLips {
+                let outerLipsPoints = outerLips.pointsInImage(imageSize: self.sceneView.bounds.size)
+                
+                self.drawPointsOnImage(outerLipsPoints)
+            }
+        }
+    }
+    
+    // MARK: Helpers
     func addABox(at hitPoint: ARHitTestResult) {
         let cubeNode = BoxyNode()
         cubeNode.position = positionFromHitTestResult(hitPoint)
@@ -110,7 +186,30 @@ class DemoARViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    // MARK: - More Actions
+    // MARK: - Actions
+    
+    func drawPointsOnImage(_ points: [CGPoint]) {
+        
+        let bezierPath = UIBezierPath.pathWithPoints(points)
+        
+        let bezierPathLayer = CAShapeLayer()
+        bezierPathLayer.strokeColor = UIColor.red.cgColor
+        bezierPathLayer.fillColor = UIColor.red.cgColor
+        bezierPathLayer.lineWidth = 5.0
+        
+        bezierPathLayer.path = bezierPath.cgPath
+        
+        self.sceneView.layer.addSublayer(bezierPathLayer)
+    }
+    
+    @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
+        let tapPoint = sender.location(in: sceneView)
+        let results = sceneView.hitTest(tapPoint, types: ARHitTestResult.ResultType.existingPlaneUsingExtent)
+        
+        if let arhitresult = results.first {
+            addABox(at: arhitresult)
+        }
+    }
     
     @IBAction func onRefreshPressed(_ sender: UIButton) {
         let sessionConfig = ARWorldTrackingConfiguration()
@@ -140,12 +239,23 @@ class DemoARViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    @IBOutlet weak var planeDetectionSwitch: UISwitch!
-    @IBOutlet weak var sceneView: ARSCNView!
-    @IBOutlet weak var featurePointSwitch: UISwitch!
-    var boxes = Array<SCNNode>() {
-        didSet {
-            print("number of boxes \(boxes.count)")
+    @IBAction func onFaceDetectPressed(_ sender: Any) {
+        if !self.faceObservationSwitch.isOn {
+            self.sceneView.layer.sublayers?.removeAll()
+            return
+        }
+        
+        guard let currentFrameImage = self.sceneView.session.currentFrame?.capturedImage else {
+            print("something went wrong here")
+            return
+        }
+        
+        let faceLandmarksRequest = VNDetectFaceLandmarksRequest(completionHandler: self.handleVisionRequestUpdate)
+        
+        do {
+            try self.visionSequenceHandler.perform([faceLandmarksRequest], on: currentFrameImage, orientation: CGImagePropertyOrientation.right)
+        } catch {
+            print("Throws: \(error)")
         }
     }
 }

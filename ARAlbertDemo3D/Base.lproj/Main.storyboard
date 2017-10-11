@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qke-Lc-L40">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13526"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,16 +27,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Kle-aK-7eq">
-                                                <rect key="frame" x="0.0" y="5" width="111.5" height="49.5"/>
+                                                <rect key="frame" x="0.0" y="5" width="80.5" height="49.5"/>
                                                 <subviews>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MJs-6F-imX">
-                                                        <rect key="frame" x="31.5" y="0.0" width="51" height="31"/>
+                                                        <rect key="frame" x="16" y="0.0" width="51" height="31"/>
                                                         <connections>
                                                             <action selector="onPlaneDetectionSwitchChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="7Jb-ja-fwQ"/>
                                                         </connections>
                                                     </switch>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="plane detection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a6A-70-Rwy">
-                                                        <rect key="frame" x="15" y="36" width="81.5" height="13.5"/>
+                                                        <rect key="frame" x="0.0" y="36" width="80.5" height="13.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -44,16 +44,33 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="G5M-dD-LxE">
-                                                <rect key="frame" x="131.5" y="5" width="112" height="49.5"/>
+                                                <rect key="frame" x="100.5" y="5" width="81" height="49.5"/>
                                                 <subviews>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="esX-XC-dTV">
-                                                        <rect key="frame" x="31.5" y="0.0" width="51" height="31"/>
+                                                        <rect key="frame" x="16" y="0.0" width="51" height="31"/>
                                                         <connections>
                                                             <action selector="onFeaturePointSwitchChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="8Mf-yk-re5"/>
                                                         </connections>
                                                     </switch>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="feature points" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3L-hT-tuu">
-                                                        <rect key="frame" x="19.5" y="36" width="73" height="13.5"/>
+                                                        <rect key="frame" x="4" y="36" width="73" height="13.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Gum-Ne-dd3">
+                                                <rect key="frame" x="201.5" y="5" width="73" height="49.5"/>
+                                                <subviews>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UJV-qY-kuf">
+                                                        <rect key="frame" x="12" y="0.0" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="onFaceDetectPressed:" destination="BV1-FR-VrT" eventType="valueChanged" id="prn-M3-RnO"/>
+                                                        </connections>
+                                                    </switch>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="feature points" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcS-XG-HJZ">
+                                                        <rect key="frame" x="0.0" y="36" width="73" height="13.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -61,10 +78,10 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRl-YJ-Pqu">
-                                                <rect key="frame" x="263.5" y="15" width="111.5" height="30"/>
+                                                <rect key="frame" x="294.5" y="15" width="80.5" height="30"/>
                                                 <state key="normal" title="refresh"/>
                                                 <connections>
-                                                    <action selector="onRefreshPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="LnL-HQ-eo9"/>
+                                                    <action selector="onRefreshPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="B86-Jm-zSO"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -104,6 +121,7 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="faceObservationSwitch" destination="UJV-qY-kuf" id="z28-cA-gwo"/>
                         <outlet property="featurePointSwitch" destination="esX-XC-dTV" id="bJ8-b0-HJw"/>
                         <outlet property="planeDetectionSwitch" destination="MJs-6F-imX" id="Rzq-dJ-tQk"/>
                         <outlet property="sceneView" destination="KUW-0R-UYj" id="9p6-5q-XXE"/>

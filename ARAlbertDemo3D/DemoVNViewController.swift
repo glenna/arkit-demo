@@ -19,6 +19,8 @@ class DemoVNViewController: UIViewController {
     
     let faceLandmarksDetectionRequest = VNSequenceRequestHandler()
     
+    private var lastObservation: VNDetectedObjectObservation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
