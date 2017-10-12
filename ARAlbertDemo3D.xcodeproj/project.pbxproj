@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD16376A1F8FADBA009E892E /* UIBezierPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1637691F8FADBA009E892E /* UIBezierPath+Extension.swift */; };
 		FD2121A41F4F3A6900E1F4F8 /* BoxyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2121A31F4F3A6900E1F4F8 /* BoxyNode.swift */; };
 		FD4CA6781F0936A00024CD5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4CA6771F0936A00024CD5C /* AppDelegate.swift */; };
 		FD4CA67C1F0936A00024CD5C /* DemoARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4CA67B1F0936A00024CD5C /* DemoARViewController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD1637691F8FADBA009E892E /* UIBezierPath+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extension.swift"; sourceTree = "<group>"; };
 		FD2121A31F4F3A6900E1F4F8 /* BoxyNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxyNode.swift; sourceTree = "<group>"; };
 		FD4CA6741F0936A00024CD5C /* ARAlbertDemo3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARAlbertDemo3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD4CA6771F0936A00024CD5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				FD4CA6851F0936A00024CD5C /* Info.plist */,
 				FD562BD81F4DFFD8004317B3 /* PlaneNode.swift */,
 				FD2121A31F4F3A6900E1F4F8 /* BoxyNode.swift */,
+				FD1637691F8FADBA009E892E /* UIBezierPath+Extension.swift */,
 			);
 			path = ARAlbertDemo3D;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				FD4CA67C1F0936A00024CD5C /* DemoARViewController.swift in Sources */,
 				FD2121A41F4F3A6900E1F4F8 /* BoxyNode.swift in Sources */,
 				FD4CA6781F0936A00024CD5C /* AppDelegate.swift in Sources */,
+				FD16376A1F8FADBA009E892E /* UIBezierPath+Extension.swift in Sources */,
 				FD9FD6621F7AE2D500928CC2 /* DemoVNViewController.swift in Sources */,
 				FD562BD91F4DFFD8004317B3 /* PlaneNode.swift in Sources */,
 			);

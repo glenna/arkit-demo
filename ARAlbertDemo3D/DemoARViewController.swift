@@ -130,37 +130,37 @@ class DemoARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelega
             if let nose = faceLandmarks.nose {
                 let nosePoints = nose.pointsInImage(imageSize: self.sceneView.bounds.size)
                 
-                self.drawPointsOnImage(nosePoints)
+                self.drawOnImage(withPoints: nosePoints)
             }
             
             if let rightEye = faceLandmarks.rightEye {
                 let rightEyePoints = rightEye.pointsInImage(imageSize: self.sceneView.bounds.size)
                 
-                self.drawPointsOnImage(rightEyePoints)
+                self.drawOnImage(withPoints: rightEyePoints)
             }
             
             if let leftEye = faceLandmarks.leftEye {
                 let leftEyePoints = leftEye.pointsInImage(imageSize: self.sceneView.bounds.size)
                 
-                self.drawPointsOnImage(leftEyePoints)
+                self.drawOnImage(withPoints: leftEyePoints)
             }
             
             if let rightEyebrow = faceLandmarks.rightEyebrow {
                 let rightEyebrowPoints = rightEyebrow.pointsInImage(imageSize: self.sceneView.bounds.size)
                 
-                self.drawPointsOnImage(rightEyebrowPoints)
+                self.drawOnImage(withPoints: rightEyebrowPoints)
             }
             
             if let leftEyebrow = faceLandmarks.leftEyebrow {
                 let leftEyebrowPoints = leftEyebrow.pointsInImage(imageSize: self.sceneView.bounds.size)
                 
-                self.drawPointsOnImage(leftEyebrowPoints)
+                self.drawOnImage(withPoints: leftEyebrowPoints)
             }
             
             if let outerLips = faceLandmarks.outerLips {
                 let outerLipsPoints = outerLips.pointsInImage(imageSize: self.sceneView.bounds.size)
                 
-                self.drawPointsOnImage(outerLipsPoints)
+                self.drawOnImage(withPoints: outerLipsPoints)
             }
         }
     }
@@ -184,12 +184,9 @@ class DemoARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelega
                               hitPoint.worldTransform.columns.3.z)
     }
     
-    
-    // MARK: - Actions
-    
-    func drawPointsOnImage(_ points: [CGPoint]) {
+    func drawOnImage(withPoints points: [CGPoint]) {
         
-        let bezierPath = UIBezierPath.pathWithPoints(points)
+        let bezierPath = UIBezierPath.init(withPoints: points)
         
         let bezierPathLayer = CAShapeLayer()
         bezierPathLayer.strokeColor = UIColor.red.cgColor
@@ -200,6 +197,8 @@ class DemoARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelega
         
         self.sceneView.layer.addSublayer(bezierPathLayer)
     }
+    
+    // MARK: - Actions
     
     @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
         let tapPoint = sender.location(in: sceneView)

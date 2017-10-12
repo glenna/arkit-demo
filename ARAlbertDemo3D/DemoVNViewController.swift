@@ -45,37 +45,37 @@ class DemoVNViewController: UIViewController {
                     if let nose = faceLandmarks.nose {
                         let nosePoints = nose.pointsInImage(imageSize: self.glennaImageView.bounds.size)
                         
-                        self.drawPointsOnImage(nosePoints)
+                        self.drawOnImage(withPoints: nosePoints)
                     }
                     
                     if let rightEye = faceLandmarks.rightEye {
                         let rightEyePoints = rightEye.pointsInImage(imageSize: self.glennaImageView.bounds.size)
                         
-                        self.drawPointsOnImage(rightEyePoints)
+                        self.drawOnImage(withPoints: rightEyePoints)
                     }
                     
                     if let leftEye = faceLandmarks.leftEye {
                         let leftEyePoints = leftEye.pointsInImage(imageSize: self.glennaImageView.bounds.size)
                         
-                        self.drawPointsOnImage(leftEyePoints)
+                        self.drawOnImage(withPoints: leftEyePoints)
                     }
                     
                     if let rightEyebrow = faceLandmarks.rightEyebrow {
                         let rightEyebrowPoints = rightEyebrow.pointsInImage(imageSize: self.glennaImageView.bounds.size)
                         
-                        self.drawPointsOnImage(rightEyebrowPoints)
+                        self.drawOnImage(withPoints: rightEyebrowPoints)
                     }
                     
                     if let leftEyebrow = faceLandmarks.leftEyebrow {
                         let leftEyebrowPoints = leftEyebrow.pointsInImage(imageSize: self.glennaImageView.bounds.size)
                         
-                        self.drawPointsOnImage(leftEyebrowPoints)
+                        self.drawOnImage(withPoints: leftEyebrowPoints)
                     }
                     
                     if let outerLips = faceLandmarks.outerLips {
                         let outerLipsPoints = outerLips.pointsInImage(imageSize: self.glennaImageView.bounds.size)
                         
-                        self.drawPointsOnImage(outerLipsPoints)
+                        self.drawOnImage(withPoints: outerLipsPoints)
                     }
                 }
             }
@@ -87,9 +87,9 @@ class DemoVNViewController: UIViewController {
         try? requestHandler.perform([faceLandmarksRequest])
     }
     
-    func drawPointsOnImage(_ points: [CGPoint]) {
+    func drawOnImage(withPoints points: [CGPoint]) {
         
-        let bezierPath = UIBezierPath.pathWithPoints(points)
+        let bezierPath = UIBezierPath.init(withPoints: points)
         
         let bezierPathLayer = CAShapeLayer()
         bezierPathLayer.strokeColor = UIColor.red.cgColor
@@ -99,23 +99,5 @@ class DemoVNViewController: UIViewController {
         bezierPathLayer.path = bezierPath.cgPath
         
         self.bezierPathView.layer.addSublayer(bezierPathLayer)
-    }
-}
-
-extension UIBezierPath {
-    class func pathWithPoints(_ points: [CGPoint]) -> UIBezierPath {
-        let path = UIBezierPath()
-        path.lineWidth = 2.0
-        
-        path.move(to: points[0])
-        let otherPoints = points.suffix(points.count - 1)
-        
-        for point in otherPoints {
-            path.addLine(to: point)
-        }
-        
-        path.close()
-        
-        return path
     }
 }
