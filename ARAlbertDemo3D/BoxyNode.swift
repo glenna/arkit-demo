@@ -14,14 +14,14 @@ class BoxyNode: SCNNode {
     override init() {
         super.init()
         
-        let cube = createBox()
-        self.geometry = cube;
+        let cube: SCNBox = createBox()
+        geometry = cube;
         
-        let physics = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: cube, options: nil))
-        physics.mass = 0.01
+        let physics: SCNPhysicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: cube, options: nil))
+        physics.mass = 0.02
         physics.categoryBitMask = 1
         
-        self.physicsBody = physics
+        physicsBody = physics
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,11 +29,11 @@ class BoxyNode: SCNNode {
     }
     
     func createBox() -> SCNBox {
-        let dimension: CGFloat = 0.2
-        let cube = SCNBox(width: dimension, height: dimension, length: dimension, chamferRadius: 0.01)
+        let dimension: CGFloat = CGFloat(Float.random(in: 0.2...0.25))
+        let cube: SCNBox = SCNBox(width: dimension, height: dimension, length: dimension, chamferRadius: 0.01)
         
-        let material = SCNMaterial()
-        material.diffuse.contents = #imageLiteral(resourceName: "Cardboard")
+        let material: SCNMaterial = SCNMaterial()
+        material.diffuse.contents = UIImage(named: "wrapping_paper_\(Int.random(in: 1...3))")!
         
         cube.materials = [material]
         
